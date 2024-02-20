@@ -25,6 +25,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "cassandra-driver": "^4.7.2",
     "node-cache": "^5.1.2"
   }
 }
