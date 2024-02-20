@@ -6,12 +6,13 @@
  */
 
 import NodeCache from 'node-cache';
-import { ICacheManager } from './interfaces';
+import { CacheManagerOptions, ICacheManager } from './interfaces';
 
 export class CacheManager implements ICacheManager {
     private cache: NodeCache;
 
-    constructor(ttlSeconds: number = 0) {
+    constructor(options: CacheManagerOptions = {}) {
+        const ttlSeconds = options.ttlSeconds || 60;
         this.cache = new NodeCache({ stdTTL: ttlSeconds });
     }
 

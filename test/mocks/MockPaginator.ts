@@ -4,29 +4,42 @@
  * Licensed under the MIT License. See LICENSE.txt in the project root for license information.
  *
  */
-import { ICacheManager, IPaginator } from '../../src/interfaces';
+import { IPaginator } from '../../src/interfaces';
 
 export class MockPaginator<T> implements IPaginator<T> {
-  private pageSize: number;
-  private totalPages: number;
-  private currentPageData: T[] | null = null;
+    private totalPages: number;
+    private currentPageData: T[] | null = null;
 
-  constructor(private cacheManager: ICacheManager, values: T[], pageSize: number = 10) {
-    this.pageSize = pageSize;
-    this.totalPages = Math.ceil(values.length / pageSize);
-  }
+    constructor(values: T[], totalPages: number) {
+        this.currentPageData = values;
+        this.totalPages = totalPages;
+    }
 
-  public getPage(pageNumber: number): T[] | null {
-    // Simulate getting a page.
-    return this.currentPageData;
-  }
+    public addItems(newItems: T[]): void {
+        // Simulate adding items to the paginator
+        // This is a no-op for the mock
+    }
 
-  public getTotalPages(): number {
-    return this.totalPages;
-  }
+    public getPage(pageNumber: number): T[] | null {
+        // Simulate getting a page.
+        if (pageNumber < 1 || pageNumber > this.totalPages) {
+            return null;
+        }
+        return this.currentPageData;
+    }
 
-  // Utility method for tests to set expected data for getPage method
-  public setCurrentPageData(data: T[] | null): void {
-    this.currentPageData = data;
-  }
+    public getTotalPages(): number {
+        return this.totalPages;
+    }
+
+    // Utility method for tests to set expected data for getPage method
+    public setCurrentPageData(data: T[] | null, totalPages?: number): void {
+        this.currentPageData = data;
+        this.totalPages = totalPages || this.totalPages;
+    }
+
+    // Utility method for tests to set expected totalPages
+    public setTotalPages(totalPages: number): void {
+        this.totalPages = totalPages;
+    }
 }
