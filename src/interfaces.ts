@@ -11,4 +11,9 @@ export interface ICacheManager {
     del(key: string): void;
     flush(): void;
 }
+
+export interface IPaginator<T> {
+    getPage(pageNumber: number): T[] | null;
+    getTotalPages(): number;
+}
   
