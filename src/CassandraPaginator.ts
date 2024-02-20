@@ -70,7 +70,7 @@ export class CassandraPaginator {
         if (pageData) {
             this.currentPageNumber = pageNumber;
         }
-    
+
         return pageData;
     }
 
@@ -82,16 +82,16 @@ export class CassandraPaginator {
     async getNextPage(): Promise<types.Row[] | null> {
         // Increment the current page number to get the next page
         this.currentPageNumber++;
-    
+
         // Try to fetch the next page
         const nextPageData = await this.getPage(this.currentPageNumber);
-    
+
         // If nextPageData is null, it means we are past the last page
         if (!nextPageData) {
-            this.currentPageNumber =this.getTotalPages() || 0;
+            this.currentPageNumber = this.getTotalPages() || 0;
             return null;
         }
-    
+
         return nextPageData;
     }
 
@@ -102,7 +102,7 @@ export class CassandraPaginator {
      */
     getCurrentPageNumber(): number | null {
         return this.isQueryStarted ? this.currentPageNumber : null;
-    }        
+    }
 
     /**
      * Returns the total number of pages available.
