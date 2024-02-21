@@ -1,0 +1,11 @@
+{
+    "entryPoints": ["src"],
+    "out": "docs",
+    "exclude": ["**/node_modules/**", "**/*.spec.ts"],
+    "excludeExternals": true,
+    "excludePrivate": true,
+    "plugin": ["typedoc-plugin-markdown"],
+    "entryPointStrategy": "expand",
+    "hideInPageTOC": true,
+  }
+  

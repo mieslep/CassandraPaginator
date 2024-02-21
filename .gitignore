@@ -1,5 +1,8 @@
 dist/
+dist-tests/
+docs/
 node_modules/
 npm-debug.log
 .DS_Store
 *.env
+cassandra-paginator-*.tgz

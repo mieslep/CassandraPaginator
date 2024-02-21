@@ -5,7 +5,6 @@
  *
  */
 import { CassandraPaginator } from '../../src/CassandraPaginator'; 
-import { Client } from 'cassandra-driver';
 
 const PAGE_SIZE = 25;
 const FETCH_SIZE = PAGE_SIZE * 2;
@@ -17,6 +16,7 @@ jest.mock('cassandra-driver', () => ({
         execute: jest.fn((query, params, options) => executeMockBehavior(query, params, options)),
     })),
 }));
+import { Client } from 'cassandra-driver';
 
 describe('CassandraPaginator - Main Tests', () => {
     let client: Client;

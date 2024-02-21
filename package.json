@@ -1,31 +1,59 @@
 {
   "name": "cassandra-paginator",
-  "version": "0.1.0",
-  "description": "",
+  "version": "0.1.2",
+  "description": "A utility for paginating Cassandra query results in Node.js applications.",
+  "author": "Phil Miesle <phil.miesle@datastax.com>",
+  "keywords": [
+    "cassandra",
+    "paginator",
+    "nodejs",
+    "database",
+    "pagination"
+  ],
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "clean": "rimraf dist dist-tests docs",
+    "pretest": "npm run clean && tsc -p tsconfig.tests.json",
     "test": "jest",
     "test:specific": "jest --",
-    "build": "tsc",
-    "build:watch": "tsc --watch",
-    "start": "node dist/index.js"
+    "generate-docs": "typedoc",
+    "build": "npm run clean && tsc && npm run generate-docs",
+    "pack:prepare": "npm run build && npm pack",
+    "prepublishOnly": "npm test && npm run build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/jest": "^29.5.12",
     "@types/node": "^20.11.19",
     "@types/node-cache": "^4.2.5",
     "eslint": "^8.56.0",
-    "eslint-plugin-react": "^7.33.2",
     "jest": "^29.7.0",
+    "rimraf": "^5.0.5",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
+    "typedoc": "^0.25.8",
+    "typedoc-plugin-markdown": "^3.17.1",
     "typescript": "^5.3.3"
   },
   "dependencies": {
     "cassandra-driver": "^4.7.2",
     "node-cache": "^5.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mieslep/CassandraPaginator.git"
+  },
+  "files": [
+    "dist",
+    "docs",
+    "LICENSE.txt",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
   }
 }
